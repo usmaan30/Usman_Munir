@@ -1,12 +1,30 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
 {
-    "sections": {
-      "banner": {
-        "type": "banner"
-      },
-      "grid": {
-        "type": "grid"
+  "sections": {
+    "banner": {
+      "type": "banner",
+      "settings": {
+        "banner_heading": "Your Banner Heading",
+        "banner_subheading": "Your Banner Subheading",
+        "banner_button_text": "Click Me"
       }
     },
-    "order": ["banner", "grid"]
-  }
-  
+    "grid": {
+      "type": "grid",
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "grid"
+  ]
+}
