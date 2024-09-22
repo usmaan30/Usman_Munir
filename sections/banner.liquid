@@ -1,0 +1,31 @@
+<section class="banner-section">
+  <div class="banner-content">
+    <h1>{{ section.settings.banner_heading }}</h1>
+    <p>{{ section.settings.banner_subheading }}</p>
+    <button>{{ section.settings.banner_button_text }}</button>
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Banner",
+    "settings": [
+      {
+        "type": "text",
+        "id": "banner_heading",
+        "label": "Banner Heading",
+        "default": "Your Banner Heading"
+      }, {
+        "type": "text",
+        "id": "banner_subheading",
+        "label": "Banner Subheading",
+        "default": "Your Banner Subheading"
+      }, {
+        "type": "text",
+        "id": "banner_button_text",
+        "label": "Button Text",
+        "default": "Click Me"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,49 @@
+<section class="grid-section">
+  <div class="product-grid">
+    {% for block in section.blocks %}
+      <div class="product-block">
+        <img
+          src="{{ block.settings.product_image | image_url: 'medium' }}"
+          alt="{{ block.settings.product_name }}"
+          width="300"
+          height="300">
+
+        <h3>{{ block.settings.product_name }}</h3>
+        <p>{{ block.settings.product_price }}</p>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Product Grid",
+    "blocks": [
+      {
+        "type": "product",
+        "name": "Product",
+        "settings": [
+          {
+            "type": "product",
+            "id": "product_image",
+            "label": "Product Image"
+          }, {
+            "type": "text",
+            "id": "product_name",
+            "label": "Product Name"
+          }, {
+            "type": "text",
+            "id": "product_price",
+            "label": "Product Price"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Product Grid",
+        "category": "Grid"
+      }
+    ]
+  }
+{% endschema %}
