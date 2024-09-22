@@ -12,7 +12,7 @@
     "banner": {
       "type": "banner",
       "settings": {
-        "banner_heading": "Your Banner Heading",
+        "banner_heading": "The Gift Guide",
         "banner_subheading": "Your Banner Subheading",
         "banner_button_text": "Click Me"
       }
