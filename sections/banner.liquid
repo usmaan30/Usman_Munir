@@ -1,31 +1,354 @@
 <section class="banner-section">
-  <div class="banner-content">
-    <h1>{{ section.settings.banner_heading }}</h1>
-    <p>{{ section.settings.banner_subheading }}</p>
-    <button>{{ section.settings.banner_button_text }}</button>
+  {% comment %} Part 1 of Banner Section {% endcomment %}
+  <div class="banner">
+    <div class="banner-nav">
+      <button class="hamburger-icon">
+        <svg
+          width="20"
+          height="16"
+          viewBox="0 0 20 12"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M1 6H19"
+            stroke="black"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round" />
+          <path
+            d="M1 1H19"
+            stroke="black"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round" />
+          <path
+            d="M1 11H19"
+            stroke="black"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
+        <svg
+          width="20"
+          height="16"
+          viewBox="0 0 15 15"
+          fill="none"
+          style="display: none;"
+          xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M1 13.9994L13.7279 1.2715"
+            stroke="black"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round" />
+          <path
+            d="M1 1L13.7279 13.7279"
+            stroke="black"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
+
+      </button>
+
+      <h2 class="nav-f1">{{ section.settings.nav_f1 }}</h2>
+      <p class="nav-f2">{{ section.settings.nav_f2 }}</p>
+      <button class="nav-f3">{{ section.settings.nav_f3 }}
+        <svg
+          width="27"
+          height="12"
+          viewBox="0 0 27 12"
+          fill="white"
+          xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 5.25C0.585786 5.25 0.25 5.58579 0.25 6C0.25 6.41421 0.585786 6.75 1 6.75L1 5.25ZM26.5303 6.53033C26.8232 6.23743 26.8232 5.76256 26.5303 5.46967L21.7574 0.696697C21.4645 0.403804 20.9896 0.403804 20.6967 0.696697C20.4038 0.989591 20.4038 1.46446 20.6967 1.75736L24.9393 6L20.6967 10.2426C20.4038 10.5355 20.4038 11.0104 20.6967 11.3033C20.9896 11.5962 21.4645 11.5962 21.7574 11.3033L26.5303 6.53033ZM1 6.75L26 6.75L26 5.25L1 5.25L1 6.75Z" fill="#333333" />
+        </svg>
+      </button>
+    </div>
   </div>
+
+  {% comment %} Part 2 of banner section {% endcomment %}
+
+  <div class="banner-p2">
+    <div class="banner-p2-text">
+      <h1 class="banner-t1">{{ section.settings.banner-t1 }}</h1>
+      <p class="banner-t2">{{ section.settings.banner-t2 }}</p>
+      <p class="banner-t21">{{ section.settings.banner-t21 }}</p>
+
+      <button class="banner-t3">{{ section.settings.banner-t3 }}
+        <svg
+          width="27"
+          height="12"
+          viewBox="0 0 27 12"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 5.25C0.585786 5.25 0.25 5.58579 0.25 6C0.25 6.41421 0.585786 6.75 1 6.75L1 5.25ZM26.5303 6.53033C26.8232 6.23743 26.8232 5.76256 26.5303 5.46967L21.7574 0.696697C21.4645 0.403804 20.9896 0.403804 20.6967 0.696697C20.4038 0.989591 20.4038 1.46446 20.6967 1.75736L24.9393 6L20.6967 10.2426C20.4038 10.5355 20.4038 11.0104 20.6967 11.3033C20.9896 11.5962 21.4645 11.5962 21.7574 11.3033L26.5303 6.53033ZM1 6.75L26 6.75L26 5.25L1 5.25L1 6.75Z" fill="white" />
+        </svg>
+      </button>
+    </div>
+    <div class="banner-p2-image">
+      <div class="image-box"><br></div>
+    </div>
+
+  </div>
+
+  <p class="banner-p3">{{ section.settings.banner-p3 }}</p>
+
+
 </section>
+
+<style>
+  * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    color: black;
+  }
+
+
+  .banner-section {
+    min-height: 100vh;
+  }
+
+  /* Banner section Part 1 CSS */
+  .banner {
+    background-image: url('{{'background-image.jpg' | asset_url}}');
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    min-height: 60vh;
+  }
+
+  /* Nav */
+  .banner-nav {
+    position: fixed;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgb(240, 240, 240);
+  }
+
+  .banner-nav h2 {
+    color: black;
+    font-weight: bold;
+    margin: 12px 30px;
+  }
+
+  .banner-nav p {
+    text-align: center;
+    margin: 12px 30px;
+  }
+
+  .nav-f3 {
+    background-color: yellow;
+    font-size: medium;
+    padding: 10px;
+    margin: 12px 30px;
+    border: none;
+    background: linear-gradient(to left, yellow 50%, black 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+    transition: 0.5s ease-in-out
+    , color 0.5s ease-in-out;
+
+  }
+  .nav-f3:hover {
+    background-position: left bottom;
+    color: white;
+    cursor: pointer;
+  }
+  .nav-f3 svg {
+    margin-left: 3px;
+  }
+  .nav-f3:hover svg path {
+    fill: white;
+  }
+
+  /* Styling for class hamburger-icon */
+  .hamburger-icon {
+    background: none;
+    border: none;
+    position: absolute;
+    cursor: pointer;
+    display: none;
+
+  }
+
+  /* Banner section Part 2 CSS */
+
+  .banner-p2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10px;
+    min-height: 40vh;
+  }
+
+  .banner-p2-text {
+    flex: 1;
+    margin-left: 30px;
+    padding: 10px;
+  }
+  .banner-t1 {
+    font-weight: bold;
+  }
+  .banner-t2 {
+    margin-top: 20px;
+  }
+  .banner-t21 {
+    margin-bottom: 20px;
+  }
+  .banner-t3 {
+    color: white;
+    background-color: yellow;
+    margin: 10px 0;
+    font-size: medium;
+    padding: 10px;
+    border: none;
+    background: linear-gradient(to left, black 50%, yellow 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+    transition: 0.5s ease-in-out
+    , color 0.5s ease-in-out;
+
+  }
+  .banner-t3:hover {
+    background-position: left bottom;
+    color: black;
+    cursor: pointer;
+  }
+
+  .banner-t3:hover svg path {
+    fill: black;
+  }
+
+
+  .banner-p2-image {
+    flex: 2;
+    display: flex;
+
+  }
+
+  .image-box {
+    background-image: url('{{'background-image.jpg' | asset_url}}');
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 300px;
+  }
+
+
+  .banner-p3 {
+    padding: 2px;
+
+    display: flex;
+    justify-content: center;
+    background-color: rgb(240, 240, 240);
+  }
+
+  /* CSS for mobile devices implementation */
+  @media (max-width: 768px) {
+    .hamburger-icon {
+      display: block;
+      position: absolute;
+      left: 10px;
+    }
+    .banner-nav {
+      padding: 10px;
+      justify-content: center;
+      flex-direction: column;
+    }
+    .banner-nav h2 {
+      text-align: center;
+      margin: 0 auto;
+    }
+    .nav-f2,
+    .nav-f3 {
+      display: none;
+    };
+
+    /* currently only nav is mobile responsive */
+  }
+
+
+</style>
 
 {% schema %}
   {
+
     "name": "Banner",
     "settings": [
       {
         "type": "text",
-        "id": "banner_heading",
-        "label": "Banner Heading",
-        "default": "Your Banner Heading"
+        "id": "nav_f1",
+        "label": "Nav F1",
+        "default": "TISSO VISION"
+      },
+      {
+        "type": "text",
+        "id": "nav_f2",
+        "label": "Nav F2",
+        "default": "Find the ideal deal for your loved ones"
+      },
+      {
+        "type": "text",
+        "id": "nav_f3",
+        "label": "Nav F3",
+        "default": "CHOOSE GIFT"
+      },
+      {
+        "type": "text",
+        "id": "banner-t1",
+        "label": "Banner Text-1",
+        "default": "The Guift Guide"
       }, {
         "type": "text",
-        "id": "banner_subheading",
-        "label": "Banner Subheading",
-        "default": "Your Banner Subheading"
+        "id": "banner-t2",
+        "label": "Banner Text-2",
+        "default": "Discover Joy: Your Ultimate Holiday Gift Destination."
       }, {
         "type": "text",
-        "id": "banner_button_text",
-        "label": "Button Text",
-        "default": "Click Me"
+        "id": "banner-t21",
+        "label": "Banner Text-2(1)",
+        "default": "Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season."
+      }, {
+        "type": "text",
+        "id": "banner-t3",
+        "label": "Banner Text-3",
+        "default": "SHOP NOW"
+      }, {
+        "type": "text",
+        "id": "banner-p3",
+        "label": "Banner Last Line",
+        "default": "SUSTAINABLE ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL"
       }
     ]
   }
+
+
 {% endschema %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function(){
+    const hamburgerButton = document.querySelector('.hamburger-icon');
+    const navF2 = document.querySelector('.nav-f2');
+    const navF3 = document.querySelector('.nav-f3');
+    const crossIcon = document.querySelector('.hamburger-icon svg:nth-child(2)');
+    const hamburgerIcon = document.querySelector('.hamburger-icon svg:nth-child(1)');
+  
+    hamburgerButton.addEventListener('click',function(){
+      if(navF2.style.display === 'none' || !navF2.style.display){
+        navF2.style.display ='block';
+        navF3.style.display='block';
+        hamburgerIcon.style.display='none';
+        crossIcon.style.display='block';
+      } else {
+        navF2.style.display = 'none';
+        navF3.style.display='none';
+        hamburgerIcon.style.display='block';
+        crossIcon.style.display='none';
+      }
+    });
+  });
+</script>
