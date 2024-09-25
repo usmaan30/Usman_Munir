@@ -1,0 +1,353 @@
+<section class="image-grid-section">
+  <h2 class="image-grid-section-heading">Tisso vision in the wild</h2>
+  <div class="image-grid">
+    {% comment %} Creating variable for storing images and loop for looping through different images. Give concise and clean look to code {% endcomment %}
+    {% assign images = "image822.jpg,image823.jpg,image824.jpg,image825.jpg,image826.jpg,image827.jpg," | split: ',' %}
+    {% for image in images %}
+      <div class="grid-item">
+        <img
+          src="{{image |  asset_url}}"
+          alt="Grid image {{forloop.index}}"
+          width="300"
+          height="300">
+
+        {% comment %} Adding small quick view icon containg link to pop-up {% endcomment %}
+        <div class="quick-view-icon">
+          <svg
+            width="30"
+            height="30"
+            viewBox="0 0 30 30"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <g filter="url(#filter0_d_3_2760)">
+              <circle
+                cx="15"
+                cy="12"
+                r="11"
+                fill="#F8F8F8"
+                fill-opacity="0.9" />
+              <path
+                d="M15.3457 8.04175V16.5033"
+                stroke="black"
+                stroke-width="1.5"
+                stroke-linecap="square"
+                stroke-linejoin="round" />
+              <path
+                d="M11.1152 12.2725H19.5768"
+                stroke="black"
+                stroke-width="1.5"
+                stroke-linecap="square"
+                stroke-linejoin="round" />
+            </g>
+            <defs>
+              <filter
+                id="filter0_d_3_2760"
+                x="0"
+                y="0"
+                width="30"
+                height="30"
+                filterUnits="userSpaceOnUse"
+                color-interpolation-filters="sRGB">
+                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                <feColorMatrix
+                  in="SourceAlpha"
+                  type="matrix"
+                  values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                  result="hardAlpha" />
+                <feOffset dy="3" />
+                <feGaussianBlur stdDeviation="2" />
+                <feComposite in2="hardAlpha" operator="out" />
+                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0" />
+                <feBlend
+                  mode="normal"
+                  in2="BackgroundImageFix"
+                  result="effect1_dropShadow_3_2760" />
+                <feBlend
+                  mode="normal"
+                  in="SourceGraphic"
+                  in2="effect1_dropShadow_3_2760"
+                  result="shape" />
+              </filter>
+            </defs>
+          </svg>
+        </div>
+      </div>
+    {% endfor %}
+
+  </div>
+</section>
+
+
+<div id="product-popup" class="popup-overlay">
+  <div class="popup-content">
+    <span class="close-popup">
+      <svg
+        width="30"
+        height="30"
+        viewBox="0 0 30 30"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg">
+        <g filter="url(#filter0_d_5_3065)">
+          <circle
+            cx="15"
+            cy="12"
+            r="11"
+            fill="#F8F8F8"
+            fill-opacity="0.9" />
+          <path
+            d="M12.3536 9.28107L18.3368 15.2643"
+            stroke="black"
+            stroke-width="1.5"
+            stroke-linecap="square"
+            stroke-linejoin="round" />
+          <path
+            d="M12.3535 15.2642L18.3367 9.28095"
+            stroke="black"
+            stroke-width="1.5"
+            stroke-linecap="square"
+            stroke-linejoin="round" />
+        </g>
+        <defs>
+          <filter
+            id="filter0_d_5_3065"
+            x="0"
+            y="0"
+            width="30"
+            height="30"
+            filterUnits="userSpaceOnUse"
+            color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feColorMatrix
+              in="SourceAlpha"
+              type="matrix"
+              values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+              result="hardAlpha" />
+            <feOffset dy="3" />
+            <feGaussianBlur stdDeviation="2" />
+            <feComposite in2="hardAlpha" operator="out" />
+            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0" />
+            <feBlend
+              mode="normal"
+              in2="BackgroundImageFix"
+              result="effect1_dropShadow_5_3065" />
+            <feBlend
+              mode="normal"
+              in="SourceGraphic"
+              in2="effect1_dropShadow_5_3065"
+              result="shape" />
+          </filter>
+        </defs>
+      </svg>
+    </span>
+    <img
+      id="popup-image"
+      src=""
+      alt="Product Image"
+      height=""
+      width="">
+    <h3 id="popup-name">Product Name</h3>
+    <p id="popup-price">$00.00</p>
+    <p id="popup-description">Product description here</p>
+
+    <div class="color-selector">
+      <label>Color:</label>
+      <div class="color-slider">
+        <span class="color-option" style="background-color: black;"></span>
+        <span class="color-option" style="background-color: white;"></span>
+      </div>
+    </div>
+    <div class="size-selector">
+      <label for="size">Size</label>
+      <select id="size">
+        <option value="xs">XS</option>
+        <option value="s">S</option>
+        <option value="m">M</option>
+        <option value="l">L</option>
+        <option value="xl">XL</option>
+      </select>
+    </div>
+
+    {% comment %} Form for add to cart {% endcomment %}
+    <form
+      action="/cart/add"
+      id="add-to-cart-form"
+      method="post">
+      <input
+        type="hidden"
+        name="id"
+        id="variant-id"
+        value="">
+      <button type="submit" class="add-to-cart-btn">ADD TO CART
+        <svg
+          width="27"
+          height="12"
+          viewBox="0 0 27 12"
+          fill=""
+          xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 5.25C0.585786 5.25 0.25 5.58579 0.25 6C0.25 6.41421 0.585786 6.75 1 6.75L1 5.25ZM26.5303 6.53033C26.8232 6.23743 26.8232 5.76256 26.5303 5.46967L21.7574 0.696697C21.4645 0.403804 20.9896 0.403804 20.6967 0.696697C20.4038 0.989591 20.4038 1.46446 20.6967 1.75736L24.9393 6L20.6967 10.2426C20.4038 10.5355 20.4038 11.0104 20.6967 11.3033C20.9896 11.5962 21.4645 11.5962 21.7574 11.3033L26.5303 6.53033ZM1 6.75L26 6.75L26 5.25L1 5.25L1 6.75Z" fill="white" />
+        </svg>
+      </button>
+    </form>
+  </div>
+</div>
+
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: black;
+  }
+
+  .image-grid-section {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .image-grid-section-heading {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    text-align: left;
+    padding: 10px;
+    font-size: 30px;
+  }
+
+  .image-grid {
+    display: grid;
+    gap: 20px;
+    /* Following line mean 3 columns, each taking 1 fraction of space */
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .grid-item {
+    position: relative;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .grid-item img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  .quick-view-icon {
+    position: absolute;
+    top: 70px;
+    right: 100px;
+    cursor: pointer;
+    padding: 5px;
+    margin: 3px;
+    display: flex;
+  }
+
+  .quick-view-icon svg {
+    width: 26px;
+    height: 26px;
+  }
+
+  /* Responsive grid: 2 coloumn will appear for smaller screens */
+  @media (max-width: 768px) {
+    .image-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .image-grid-section-heading {
+      /* Heading will be centered for small screens */
+      text-align: center;
+    }
+  }
+
+
+  .popup-overlay {
+    /* display: none; */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+  }
+
+  .popup-content {
+    background: white;
+    padding: 20px;
+    width: 90%;
+    max-width: 400px;
+    max-height: 80%;
+    /* Following line will add scrolling if content exceeds height */
+    overflow-y: auto;
+    position: relative;
+    text-align: center;
+  }
+
+  #popup-image {
+    /* Min width ensures image fits popup and height: auto maintains aspect ratio */
+    max-width: 100%;
+    height: auto;
+  }
+
+  .close-popup {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 24px;
+  }
+
+  .color-slider {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .color-option {
+    width: 60px;
+    height: 30px;
+    cursor: pointer;
+    border: 1px solid black;
+  }
+
+  .size-selector select {
+    margin: 5px;
+    padding: 5px;
+    width: 100%;
+  }
+
+  .add-to-cart-btn {
+    color: white;
+    background-color: yellow;
+    margin: 10px 0;
+    font-size: medium;
+    padding: 10px;
+    border: none;
+    background: linear-gradient(to left, black 50%, yellow 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+    transition: 0.5s ease-in-out
+    , color 0.5s ease-in-out;
+  }
+
+  .add-to-cart-btn:hover {
+    background-position: left bottom;
+    color: black;
+    cursor: pointer;
+  }
+
+  .add-to-cart-btn svg {
+    margin-left: 10px;
+  }
+
+  .add-to-cart-btn:hover svg path {
+    fill: black;
+  }
+
+</style>
+
+
+<script></script>
