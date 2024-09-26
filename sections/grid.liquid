@@ -1,17 +1,18 @@
 <section class="image-grid-section">
   <h2 class="image-grid-section-heading">Tisso vision in the wild</h2>
   <div class="image-grid">
-    {% comment %} Creating variable for storing images and loop for looping through different images. Give concise and clean look to code {% endcomment %}
-    {% assign images = "image822.jpg,image823.jpg,image824.jpg,image825.jpg,image826.jpg,image827.jpg," | split: ',' %}
+
+    {% comment %} Variable for storing imaages and loop for loop through each of them {% endcomment %}
+    {% assign images = "image822.jpg,image823.jpg,image824.jpg,image825.jpg,image826.jpg,image827.jpg" | split: ',' %}
     {% for image in images %}
       <div class="grid-item">
         <img
-          src="{{image |  asset_url}}"
-          alt="Grid image {{forloop.index}}"
+          src="{{ image | asset_url }}"
+          alt="Grid Image {{ forloop.index }}"
           width="300"
           height="300">
-
         {% comment %} Adding small quick view icon containg link to pop-up {% endcomment %}
+        <!-- Quick View Icon -->
         <div class="quick-view-icon">
           <svg
             width="30"
@@ -73,10 +74,8 @@
         </div>
       </div>
     {% endfor %}
-
   </div>
 </section>
-
 
 <div id="product-popup" class="popup-overlay">
   <div class="popup-content">
@@ -147,17 +146,20 @@
       width="">
     <h3 id="popup-name">Product Name</h3>
     <p id="popup-price">$00.00</p>
-    <p id="popup-description">Product description here</p>
+    <p id="popup-description">Product description goes here.</p>
 
+    {% comment %} Colour Slider {% endcomment %}
     <div class="color-selector">
-      <label>Color:</label>
+      <label>Select Color:</label>
       <div class="color-slider">
         <span class="color-option" style="background-color: black;"></span>
         <span class="color-option" style="background-color: white;"></span>
       </div>
     </div>
+
+    {% comment %} Size dropdown {% endcomment %}
     <div class="size-selector">
-      <label for="size">Size</label>
+      <label for="size">Select Size:</label><br>
       <select id="size">
         <option value="xs">XS</option>
         <option value="s">S</option>
@@ -167,11 +169,11 @@
       </select>
     </div>
 
-    {% comment %} Form for add to cart {% endcomment %}
+    {% comment %} Adding form for ADD TO CART button {% endcomment %}
     <form
-      action="/cart/add"
       id="add-to-cart-form"
-      method="post">
+      method="post"
+      action="/cart/add">
       <input
         type="hidden"
         name="id"
@@ -182,15 +184,15 @@
           width="27"
           height="12"
           viewBox="0 0 27 12"
-          fill=""
+          fill="none"
           xmlns="http://www.w3.org/2000/svg">
           <path d="M1 5.25C0.585786 5.25 0.25 5.58579 0.25 6C0.25 6.41421 0.585786 6.75 1 6.75L1 5.25ZM26.5303 6.53033C26.8232 6.23743 26.8232 5.76256 26.5303 5.46967L21.7574 0.696697C21.4645 0.403804 20.9896 0.403804 20.6967 0.696697C20.4038 0.989591 20.4038 1.46446 20.6967 1.75736L24.9393 6L20.6967 10.2426C20.4038 10.5355 20.4038 11.0104 20.6967 11.3033C20.9896 11.5962 21.4645 11.5962 21.7574 11.3033L26.5303 6.53033ZM1 6.75L26 6.75L26 5.25L1 5.25L1 6.75Z" fill="white" />
         </svg>
       </button>
     </form>
+
   </div>
 </div>
-
 
 <style>
   * {
@@ -209,19 +211,23 @@
   .image-grid-section-heading {
     margin-top: 20px;
     margin-bottom: 10px;
-    text-align: left;
     padding: 10px;
-    font-size: 30px;
+    /* Adds space between heading and grid */
+    text-align: left;
+    font-size: 24px;
+    font-weight: bold;
   }
 
   .image-grid {
     display: grid;
     gap: 20px;
-    /* Following line mean 3 columns, each taking 1 fraction of space */
+    /* 3 column, 1 fraction space for each */
     grid-template-columns: repeat(3, 1fr);
   }
+
   .grid-item {
     position: relative;
+    /* For positioning the icon on the image */
     padding: 10px;
     display: flex;
     justify-content: center;
@@ -239,9 +245,18 @@
     top: 70px;
     right: 100px;
     cursor: pointer;
+    /* background-color: rgba(0, 0, 0, 0.6); */
+    /* Dark background for contrast */
     padding: 5px;
     margin: 3px;
     display: flex;
+
+
+    /*
+
+   justify-content: center; 
+   align-items: center; 
+*/
   }
 
   .quick-view-icon svg {
@@ -249,20 +264,20 @@
     height: 26px;
   }
 
-  /* Responsive grid: 2 coloumn will appear for smaller screens */
+
+  /* Responsive grid: 2 columns for screens smaller than 768px */
   @media (max-width: 768px) {
     .image-grid {
       grid-template-columns: repeat(2, 1fr);
+      /* 2 columns for smaller screens */
     }
     .image-grid-section-heading {
-      /* Heading will be centered for small screens */
       text-align: center;
     }
   }
 
-
   .popup-overlay {
-    /* display: none; */
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
@@ -277,18 +292,21 @@
     background: white;
     padding: 20px;
     width: 90%;
+    /* Ensures popup doesn’t exceed this width */
     max-width: 400px;
+    /* Limit height to prevent overflow */
     max-height: 80%;
-    /* Following line will add scrolling if content exceeds height */
+    /* Add scrolling if content exceeds height */
     overflow-y: auto;
     position: relative;
     text-align: center;
   }
 
   #popup-image {
-    /* Min width ensures image fits popup and height: auto maintains aspect ratio */
     max-width: 100%;
+    /* Maintain aspect ratio */
     height: auto;
+
   }
 
   .close-popup {
@@ -308,10 +326,11 @@
 
   .color-option {
     width: 60px;
-    height: 30px;
+    height: 20px;
     cursor: pointer;
     border: 1px solid black;
   }
+
 
   .size-selector select {
     margin: 5px;
@@ -331,6 +350,7 @@
     background-position: right bottom;
     transition: 0.5s ease-in-out
     , color 0.5s ease-in-out;
+
   }
 
   .add-to-cart-btn:hover {
@@ -343,11 +363,62 @@
     margin-left: 10px;
   }
 
+
   .add-to-cart-btn:hover svg path {
     fill: black;
+
   }
+
+
+  /*
+
+   Responsive grid: 1 column for screens smaller than 480px 
+   @media (max-width: 480px) { 
+   .image-grid { 
+   grid-template-columns: 1fr; 
+   } 
+   } 
+*/
 
 </style>
 
 
-<script></script>
+<!-- JavaScript for Pop-up -->
+<script>
+  const popup = document.getElementById('product-popup');
+  const closePopup = document.querySelector('.close-popup');
+  const popupImage = document.getElementById('popup-image');
+  const popupName = document.getElementById('popup-name');
+  const popupPrice = document.getElementById('popup-price');
+  const popupDescription = document.getElementById('popup-description');
+  
+  document.querySelectorAll('.quick-view-icon').forEach((icon, index) => {
+    icon.addEventListener('click', function(event) {
+      event.stopPropagation();
+      const image = this.closest('.grid-item').querySelector('img').src;
+  
+      // Dynamically set the variant ID based on the index
+      const variantId = index + 1; // Replace this logic with actual variant ID retrieval
+      document.getElementById('variant-id').value = variantId;
+  
+  
+      popupImage.src = image;
+      popupName.textContent = `Product Name ${index + 1}`; // Example for product name
+      popupPrice.textContent = `$${(99 + index).toFixed(2)}`; // Example for price
+      popupDescription.textContent = `This is a description for Product ${index + 1}.`; // Example description
+      popup.style.display = 'flex';
+    });
+  });
+  
+  // Close popup on clicking the close icon (×)
+  closePopup.addEventListener('click', function() {
+    popup.style.display = 'none';
+  });
+  
+  // Close popup when clicking outside content
+  window.addEventListener('click', function(event) {
+    if (event.target === popup) {
+      popup.style.display = 'none';
+    }
+  });
+</script>
