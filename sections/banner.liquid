@@ -53,6 +53,8 @@
 
       <h2 class="nav-f1">{{ section.settings.nav_f1 }}</h2>
       <p class="nav-f2">{{ section.settings.nav_f2 }}</p>
+      {% comment %} For mobile devices {% endcomment %}
+      <p class="nav-f2M">{{ section.settings.nav_f2M }}</p>
       <button class="nav-f3">{{ section.settings.nav_f3 }}
         <svg
           width="27"
@@ -92,6 +94,8 @@
   </div>
 
   <p class="banner-p3">{{ section.settings.banner-p3 }}</p>
+  {% comment %} For mobile devices {% endcomment %}
+  <p class="banner-p3M">{{ section.settings.banner-p3M }}</p>
 
 
 </section>
@@ -106,8 +110,9 @@
 
 
   .banner-section {
-    min-height: 100vh;
+    height: 100vh;
     width: 100%;
+    margin-bottom: 60px;
   }
 
   /* Banner section Part 1 CSS */
@@ -116,7 +121,7 @@
     background-size: cover;
     background-repeat: no-repeat;
     width: 100%;
-    min-height: 60vh;
+    height: 60vh;
   }
 
   /* Nav */
@@ -137,6 +142,12 @@
   }
 
   .banner-nav p {
+    text-align: center;
+    margin: 12px 30px;
+  }
+
+  .nav-f2M {
+    display: none;
     text-align: center;
     margin: 12px 30px;
   }
@@ -193,6 +204,7 @@
   }
   .banner-t1 {
     font-weight: bold;
+    font-size: 42px;
   }
   .banner-t2 {
     margin-top: 20px;
@@ -243,37 +255,150 @@
 
   .banner-p3 {
     padding: 2px;
-
     display: flex;
     justify-content: center;
     background-color: rgb(240, 240, 240);
   }
+  .banner-p3M {
+    display: none;
+  }
 
   /* CSS for mobile devices implementation */
   @media (max-width: 768px) {
+    .banner-section {
+      height: auto;
+      margin-bottom: 0;
+    }
     .hamburger-icon {
       display: block;
       position: absolute;
       left: 10px;
     }
+
     .banner-nav {
       padding: 10px;
       justify-content: center;
       flex-direction: column;
     }
+
     .banner-nav h2 {
+      font-size: 30px;
       text-align: center;
       margin: 0 auto;
     }
+
     .nav-f2,
     .nav-f3 {
       display: none;
-    };
+    }
 
-    /* currently only nav is mobile responsive */
+
+    .banner-section {
+      height: auto;
+    }
+
+    /* Remove background image on mobile devices */
+    .banner {
+      background-image: none;
+      height: auto;
+    }
+
+    /* Move banner-t1 and banner-t2 to the removed image space */
+    .banner-p2 {
+      padding-top: 20px;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .banner-p2-text {
+      width: 100%;
+      margin: 0;
+      padding: 10px 20px;
+    }
+
+    .banner-t1 {
+      font-size: 30px;
+    }
+
+
+    .banner-t2 {
+      font-size: 20px;
+    }
+
+
+    .banner-t21 {
+      display: none;
+    }
+
+
+    /* Make banner-p2-image take full width */
+    .banner-p2-image {
+      width: 100%;
+      min-height: 200px;
+      /* Adjust height as needed */
+      position: relative;
+    }
+
+    .image-box {
+      width: 100%;
+      min-height: 300px;
+      background-size: cover;
+      background-position: center;
+    }
+
+
+    /* Position banner-t3 over the banner-p2-image */
+    .banner-t3 {
+      position: absolute;
+      top: 400px;
+      /* Adjust this value as needed */
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: rgba(0, 0, 0, 0.7);
+      /* Add transparency */
+      padding: 10px 20px;
+      color: white;
+      z-index: 1;
+      max-width: 80%;
+      /* Ensure it doesn't take up too much space */
+      text-align: center;
+    }
+    .banner-p3 {
+      display: none;
+    }
+    .banner-p3M {
+      padding: 2px;
+      display: flex;
+      justify-content: center;
+      background-color: rgb(240, 240, 240);
+    }
   }
 
+  @media (min-width: 3200px) {
+    .banner-nav h2 {
+      margin-left: 100px;
+      font-size: 50px;
+    }
+    .banner-nav p {
+      font-size: larger;
+    }
+    .nav-f3 {
+      margin-right: 100px;
+    }
+    .banner-p2-text {
+      margin-left: 100px;
+    }
+    .banner-t1 {
+      font-size: 60px;
+    }
+    .banner-t2,
+    .banner-t21 {
+      font-size: larger;
+    }
 
+
+  }
 </style>
 
 {% schema %}
@@ -295,11 +420,16 @@
       },
       {
         "type": "text",
+        "id": "nav_f2M",
+        "label": "Nav F2 (Mobile)",
+        "default": "Get started with your \"Mi Solo\" kit "
+      },
+      {
+        "type": "text",
         "id": "nav_f3",
         "label": "Nav F3",
         "default": "CHOOSE GIFT"
-      },
-      {
+      }, {
         "type": "text",
         "id": "banner-t1",
         "label": "Banner Text-1",
@@ -324,6 +454,11 @@
         "id": "banner-p3",
         "label": "Banner Last Line",
         "default": "SUSTAINABLE ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL"
+      }, {
+        "type": "text",
+        "id": "banner-p3M",
+        "label": "Banner Last Line (Mobile)",
+        "default": "SUSTAINABLE ETHICALLY MADE ACTIVEWEAR"
       }
     ]
   }
@@ -334,19 +469,19 @@
 <script>
   document.addEventListener('DOMContentLoaded', function(){
     const hamburgerButton = document.querySelector('.hamburger-icon');
-    const navF2 = document.querySelector('.nav-f2');
+    const navF2M = document.querySelector('.nav-f2M');
     const navF3 = document.querySelector('.nav-f3');
     const crossIcon = document.querySelector('.hamburger-icon svg:nth-child(2)');
     const hamburgerIcon = document.querySelector('.hamburger-icon svg:nth-child(1)');
   
     hamburgerButton.addEventListener('click',function(){
-      if(navF2.style.display === 'none' || !navF2.style.display){
-        navF2.style.display ='block';
+      if(navF2M.style.display === 'none' || !navF2M.style.display){
+        navF2M.style.display ='block';
         navF3.style.display='block';
         hamburgerIcon.style.display='none';
         crossIcon.style.display='block';
       } else {
-        navF2.style.display = 'none';
+        navF2M.style.display = 'none';
         navF3.style.display='none';
         hamburgerIcon.style.display='block';
         crossIcon.style.display='none';

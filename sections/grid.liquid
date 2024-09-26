@@ -1,4 +1,5 @@
 <section class="image-grid-section">
+
   <h2 class="image-grid-section-heading">Tisso vision in the wild</h2>
   <div class="image-grid">
 
@@ -75,6 +76,7 @@
       </div>
     {% endfor %}
   </div>
+
 </section>
 
 <div id="product-popup" class="popup-overlay">
@@ -141,24 +143,38 @@
         height=""
         width="">
       <div class="popup-text-content">
-        <h3 id="popup-name">Product Name</h3>
-        <p id="popup-price">$00.00</p>
-        <p id="popup-description">Product description goes here.</p>
+        <h3 id="popup-name"></h3>
+        <p id="popup-price" class="pop-up-price"></p>
+        <p id="popup-description"></p>
       </div>
     </div>
     {% comment %} Colour Slider {% endcomment %}
     <div class="color-selector">
-      <label>Color</label>
-      <div class="color-slider">
-        <span class="color-option" style="background-color: white; border-left:8px solid black;">Black</span>
-        <span class="color-option" style="background-color: white; border-left:8px solid grey;">Grey</span>
+      <label class="color-label">Color</label>
+      <div class="color-buttons">
+        <button
+          class="color-button"
+          id="redButton"
+          onclick="selectColor('red')"
+          style="border-left: 10px solid red">Red</button>
+        <button
+          class="color-button"
+          id="greyButton"
+          onclick="selectColor('grey')"
+          style="border-left: 10px solid grey">Grey</button>
       </div>
     </div>
+
 
     {% comment %} Size dropdown {% endcomment %}
     <div class="size-selector">
       <label for="size">Size</label>
       <select id="size">
+        <option
+          value=""
+          disabled
+          selected>Choose your size</option>
+        <!-- Default placeholder -->
         <option value="xs">XS</option>
         <option value="s">S</option>
         <option value="m">M</option>
@@ -201,8 +217,8 @@
   }
 
   .image-grid-section {
-    padding: 20px;
-    max-width: 1200px;
+    padding: 40px 20px 20px;
+    max-width: fit-content;
     margin: 0 auto;
   }
 
@@ -212,8 +228,8 @@
     padding: 10px;
     /* Adds space between heading and grid */
     text-align: left;
-    font-size: 24px;
-    font-weight: bold;
+    font-size: 30px;
+    font-weight: lighter;
   }
 
   .image-grid {
@@ -223,9 +239,10 @@
   }
 
   .grid-item {
-    position: relative;
     /* For positioning the icon on the image */
+    position: relative;
     padding: 5px;
+    margin: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -262,17 +279,6 @@
   }
 
 
-  /* Responsive grid: 2 columns for screens smaller than 768px */
-  @media (max-width: 768px) {
-    .image-grid {
-      grid-template-columns: repeat(2, 1fr);
-      /* 2 columns for smaller screens */
-    }
-    .image-grid-section-heading {
-      text-align: center;
-    }
-  }
-
   .popup-overlay {
     display: none;
     position: fixed;
@@ -299,6 +305,9 @@
     position: relative;
     text-align: center;
   }
+  .pop-up-price {
+    font-weight: bold;
+  }
 
 
   .close-popup {
@@ -322,40 +331,67 @@
   .popup-text-content {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
+    padding-left: 5px;
+  }
+
+  #popup-price {
+    padding-top: 8px;
+    padding-bottom: 12px;
+  }
+
+
+  .popup-text-content p {
+    line-height: 1;
   }
 
 
   .color-selector {
     display: flex;
     flex-direction: column;
-    /* Ensures the label is aligned to the left */
     align-items: flex-start;
-
+    margin-top: 5px;
   }
 
-  .color-slider {
+  .color-buttons {
     display: flex;
-    justify-content: flex-start;
-    margin-top: 10px;
   }
 
-  .color-option {
-    width: 80px;
-    height: auto;
-    cursor: pointer;
+  .color-button {
+    padding: 10px 20px;
+    /* Button padding */
     border: 1px solid black;
+    /* Button border */
+    background-color: white;
+    /* Default background color */
+    cursor: pointer;
+    /* Pointer cursor on hover */
+    transition: background-color 0.5s;
+    /* Smooth transition */
+    color: black;
+    /* Default text color */
   }
+
+  /* Selected state styles */
+  .color-button.selected {
+    background-color: black;
+    /* Background for selected button */
+    color: white;
+    /* Text color for selected button */
+  }
+
 
   .size-selector {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    margin-top: 5px;
+    margin-bottom: 10px;
   }
 
   .size-selector select {
-    width: 90%;
+    width: 100%;
     padding: 5px;
-    margin: 5px;
   }
 
   .add-to-cart-btn {
@@ -390,6 +426,35 @@
   }
 
 
+  /* Responsive grid: 2 columns for screens smaller than 768px */
+  @media (max-width: 768px) {
+    .image-grid {
+      grid-template-columns: repeat(2, 1fr);
+      /* 2 columns for smaller screens */
+    }
+    .image-grid-section-heading {
+      text-align: center;
+    }
+    .grid-item {
+      /* For positioning the icon on the image */
+      padding: 2px;
+      margin: 2px;
+
+    }
+  }
+
+  @media (min-width: 3200px) {
+    .image-grid-section-heading {
+      display: none;
+    }
+
+    .grid-item {
+      padding: 10px;
+      margin: 10px;
+    }
+  }
+
+
   /*
 
    Responsive grid: 1 column for screens smaller than 480px 
@@ -403,8 +468,52 @@
 </style>
 
 
-<!-- JavaScript for Pop-up -->
+{% assign product_names = "Orange Wide Leg,Tailored jacket,Accordian Pleated Dress,Green Trench Coat,Tennis Shirt Blue,Long Sleeve Tennis Top" | split: "," %}
+{% assign product_prices = "980.00,980.00,980.00,980.00,980.00,980.00" | split: "," %}
+{% assign product_descriptions = "This one-piece swimsuit is crafted from jersey featuring an allover micro Monogram motif in relief,
+                        This one-piece swimsuit is crafted from jersey featuring an allover micro Monogram motif in relief.,
+                        This one-piece swimsuit is crafted from jersey featuring an allover micro Monogram motif in relief.,
+                        This one-piece swimsuit is crafted from jersey featuring an allover micro Monogram motif in relief.,
+                        This one-piece swimsuit is crafted from jersey featuring an allover micro Monogram motif in relief.,
+                        This one-piece swimsuit is crafted from jersey featuring an allover micro Monogram motif in relief." | split: "," %}
+
+
 <script>
+  
+  // Hardcoded variant IDs for each product
+  const variantIds = [
+    '123456789',  // Variant ID for Orange Wide Leg
+    '987654321',  // Variant ID for Tailored jacket
+    '234567890',  // Variant ID for Accordian Pleated Dress
+    '876543210',  // Variant ID for Green Trench Coat
+    '345678901',  // Variant ID for Tennis Shirt Blue
+    '765432109'   // Variant ID for Long Sleeve Tennis Top
+  ];
+  
+  // Color selection logic
+  function selectColor(selectedColor) {
+    const redButton = document.getElementById('redButton');
+    const greyButton = document.getElementById('greyButton');
+    
+    // Remove selected class from both buttons
+    redButton.classList.remove('selected');
+    greyButton.classList.remove('selected');
+  
+    // Add selected class to the clicked button
+    if (selectedColor === 'red') {
+        redButton.classList.add('selected'); // Select red
+    } else if (selectedColor === 'grey') {
+        greyButton.classList.add('selected'); // Select Grey
+    }
+  }
+  // Color selection logic ended
+  
+  
+  // Convert Liquid arrays to JavaScript arrays
+  const productNames = {{ product_names | json }};
+  const productPrices = {{ product_prices | json }};
+  const productDescriptions = {{ product_descriptions | json }};
+  
   const popup = document.getElementById('product-popup');
   const closePopup = document.querySelector('.close-popup');
   const popupImage = document.getElementById('popup-image');
@@ -417,15 +526,15 @@
       event.stopPropagation();
       const image = this.closest('.grid-item').querySelector('img').src;
   
-      // Dynamically set the variant ID based on the index
-      const variantId = index + 1; // Replace this logic with actual variant ID retrieval
-      document.getElementById('variant-id').value = variantId;
+     // Dynamically set the variant ID from the hardcoded array
+     const variantId = variantIds[index]; // Assign variant ID based on the product clicked
+      document.getElementById('variant-id').value = variantId; // Set the hidden field value for the form
   
   
       popupImage.src = image;
-      popupName.textContent = `Product Name ${index + 1}`; // Example for product name
-      popupPrice.textContent = `$${(99 + index).toFixed(2)}`; // Example for price
-      popupDescription.textContent = `This is a description for Product ${index + 1}.`; // Example description
+      popupName.textContent = productNames[index];  // Set product name
+      popupPrice.textContent = `€${parseFloat(productPrices[index]).toFixed(2)}`;  // Set product price
+      popupDescription.textContent = productDescriptions[index];  // Set product description
       popup.style.display = 'flex';
     });
   });
