@@ -471,24 +471,16 @@
 {% assign product_names = "Orange Wide Leg,Tailored jacket,Accordian Pleated Dress,Green Trench Coat,Tennis Shirt Blue,Long Sleeve Tennis Top" | split: "," %}
 {% assign product_prices = "980.00,980.00,980.00,980.00,980.00,980.00" | split: "," %}
 {% assign product_descriptions = "This one-piece swimsuit is crafted from jersey featuring an allover micro Monogram motif in relief,
-                        This one-piece swimsuit is crafted from jersey featuring an allover micro Monogram motif in relief.,
-                        This one-piece swimsuit is crafted from jersey featuring an allover micro Monogram motif in relief.,
-                        This one-piece swimsuit is crafted from jersey featuring an allover micro Monogram motif in relief.,
-                        This one-piece swimsuit is crafted from jersey featuring an allover micro Monogram motif in relief.,
-                        This one-piece swimsuit is crafted from jersey featuring an allover micro Monogram motif in relief." | split: "," %}
+                            This one-piece swimsuit is crafted from jersey featuring an allover micro Monogram motif in relief.,
+                            This one-piece swimsuit is crafted from jersey featuring an allover micro Monogram motif in relief.,
+                            This one-piece swimsuit is crafted from jersey featuring an allover micro Monogram motif in relief.,
+                            This one-piece swimsuit is crafted from jersey featuring an allover micro Monogram motif in relief.,
+                            This one-piece swimsuit is crafted from jersey featuring an allover micro Monogram motif in relief." | split: "," %}
 
 
 <script>
   
-  // Hardcoded variant IDs for each product
-  const variantIds = [
-    '123456789',  // Variant ID for Orange Wide Leg
-    '987654321',  // Variant ID for Tailored jacket
-    '234567890',  // Variant ID for Accordian Pleated Dress
-    '876543210',  // Variant ID for Green Trench Coat
-    '345678901',  // Variant ID for Tennis Shirt Blue
-    '765432109'   // Variant ID for Long Sleeve Tennis Top
-  ];
+  
   
   // Color selection logic
   function selectColor(selectedColor) {
@@ -525,6 +517,9 @@
     icon.addEventListener('click', function(event) {
       event.stopPropagation();
       const image = this.closest('.grid-item').querySelector('img').src;
+  
+    // Hardcoding variant IDs for each product
+    const variantIds = [1234567890, 2345678901, 3456789012, 4567890123, 5678901234, 6789012345]; 
   
      // Dynamically set the variant ID from the hardcoded array
      const variantId = variantIds[index]; // Assign variant ID based on the product clicked
